@@ -17,10 +17,12 @@ namespace BL
         IStudentStatuseDL _IStudentStatuseDL;
         IStudentDL _IStudentDL;
         SchoolBusContext _SchoolBusContext;
-        public StudentStatuseBL(IStudentStatuseDL IStudentStatuseDL, SchoolBusContext SchoolBusContext , IStudentDL IStudentDL)
+        IFamilyDL _IFamilyDL;
+        public StudentStatuseBL(IStudentStatuseDL IStudentStatuseDL, SchoolBusContext SchoolBusContext , IStudentDL IStudentDL, IFamilyDL IFamilyDL)
         {
             _IStudentStatuseDL = IStudentStatuseDL;
             _IStudentDL = IStudentDL;
+            _IFamilyDL = IFamilyDL;
             //_SchoolBusContext = SchoolBusContext;
         }
         public async Task<bool> sentMessege(int studentId)
@@ -32,8 +34,9 @@ namespace BL
             {
                 //find the current user
                 Student student = await _IStudentDL.GetStudentById(studentId);
+                Family family = await _IFamilyDL.GetFamilyById(student.FamilyId);
                 //send a mail
-                MailAddress to = new MailAddress(student.Family.Email);
+                MailAddress to = new MailAddress(family.Email);
                 MailAddress from = new MailAddress("SchoolBusProject2022@gmail.com");
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = "Hi!!";

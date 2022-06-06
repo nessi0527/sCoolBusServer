@@ -29,15 +29,15 @@ namespace DTO
         [MinLength(3)]
         public string Password { get; set; }
 
-        public string Salt { get; set; }
+        public string? Salt { get; set; }
 
         public int StationId { get; set; }
 
-        public string StationAddress { get; set; }
+        //public string StationAddress { get; set; }
 
-        public double PointX { get; set; }
+        //public double PointX { get; set; }
 
-        public double PointY { get; set; }
+        //public double PointY { get; set; }
 
     }
 }
